@@ -7,13 +7,14 @@
     </div>
 
     <div class="q-pa-md row items-start q-gutter-md" style="width: 100%;">
-      <q-card class="my-card" v-for="movie in movies" :key="movie.imdbID">
+      <MovieCard v-for="movie in movies" :key="movie.imdbID" :movieData="movie" @click="showMovie(movie.imdbID)" />
+      <!-- <q-card class="my-card" v-for="movie in movies" :key="movie.imdbID">
         <q-img :src="movie.Poster" @click="showMovie(movie.imdbID)">
           <div class="absolute-bottom text-subtitle2 text-center">
             {{ movie.Title }}
           </div>
         </q-img>
-      </q-card>
+      </q-card> -->
     </div>
 
     <q-dialog v-model="card">
@@ -61,11 +62,13 @@
 import axios from 'axios'
 import { ref } from 'vue'
 import MoviePage from 'src/pages/MoviePage.vue'
+import MovieCard from 'src/components/MovieCard.vue'
 
 export default {
   name: 'IndexPage',
   components: {
-    MoviePage
+    MoviePage,
+    MovieCard
   },
   setup() {
     const movies = ref([])
